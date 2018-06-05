@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block homepage %}
+ <div class="col-md-10">
+  {% for a in articles %}
+	<div class="form-group" style="display: none;">
+			{{a.article_name}} 
+	</div> 
+	<br>
+  {% endfor %}
+</div>
+{% endblock %}

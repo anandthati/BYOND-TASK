@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block homepage %}
+<div class="row">
+	<div align="center" class="col-md-12" style="margin-top:5%">
+		<h4 style="text-align: center;">Add Post</h4>
+		<form action="/writepost" method="post">
+			{% csrf_token %}
+			<div class="col-md-12">
+				{% for field in form %}
+					{% if field.label != 'Owner' %}
+					    <div class="form-group formwidth">
+					    		<div class="col-md-12">
+								<span>{{field}}</span>
+								</div>
+
+								
+
+					    </div>
+					{% else %}
+						<div class="form-group" style="display: none;">
+								{{field}}
+						</div> 
+					{% endif %}
+					{% if field.errors %}
+						<div class="alert alert-danger">
+							{{field.errors}}
+						</div>
+					{% endif %}
+				{% endfor %}
+				{{ form.non_field_errors }}
+				<!--<br/><br/><br/>
+				<div class="top60"></div>-->
+			</div>
+			<div>
+				<button class="btn btn-success" type="submit">Submit </button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
