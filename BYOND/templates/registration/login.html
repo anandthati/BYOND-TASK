@@ -11,6 +11,9 @@
   <br>
   <p><strong>-- OR --</strong></p>
   <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+  <a href="{% url 'social:begin' 'facebook' %}"><fb:login-button
+ scope="public_profile,email"
+ onlogin="checkLoginState();">
+</fb:login-button></a>
 </div>
 {% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = 'toa$kmslwxxlfn)9y$log_0p)$c@21@u-^88slz5y6j235xwv#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost","127.0.0.1","0.0.0.0","http://ktrajesh.ap-south-1.elasticbeanstalk.com/"]
 
 
 # Application definition
