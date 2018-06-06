@@ -7,7 +7,7 @@
 
 	 	{% for article in articles %}
                  <div class="col-md-8 col-md-offset-1 blogShort" style="border:1px">
-                     <h3>{{article.article_name}}</h3>
+                     <h3 style="color:#00b0ff">{{article.article_name}}</h3>
                          <em>Post by: {{article.owner}}, posted on: {{article.date}} <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank"></a></em>
                      
                      <a class="btn btn-blog pull-right marginBottom10" href="{% url 'readpost' article.id %}">READ POST</a> 

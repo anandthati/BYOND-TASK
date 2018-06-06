@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm# Create your views here.
 from django.contrib.auth.decorators import login_required,user_passes_test 
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
+
 # Create your views here.
 from .forms import AddArticleForm
 from .models import Article
@@ -34,18 +36,25 @@ def dashboard(request):
 def writepost(request):
     if request.method == 'POST':
         form = AddArticleForm(request.POST)
-	title = form['article_name'].value()
+        title = form['article_name'].value()
         if form.is_valid():
-            form.save() 
-	    article_date_update = Article.objects.get(owner=request.user,article_name=title)
-	    article_date_update.date = 	datetime.datetime.now()	
+            try :
+                article_date_update = Article.objects.get(owner=request.user,article_name=title)
+                article_date_update.article_post = form['article_post'].value()
+            except ObjectDoesNotExist:
+                form.save() 
+                article_date_update = Article.objects.get(owner=request.user,article_name=title)
+
+            article_date_update.date = 	datetime.datetime.now()	
             article_date_update.save()
+            return JsonResponse("sucess",safe=False) 
         else:
             print "not valid"           
-    	return HttpResponseRedirect(reverse('dashboard'))	
+        return HttpResponseRedirect(reverse('dashboard'))	
     args={}
     args['form'] = AddArticleForm(initial={'owner':request.user})
     return render(request,'add_post.html',args)
+
 
 def readpost(request,pk):
     article = Article.objects.get(id=pk)

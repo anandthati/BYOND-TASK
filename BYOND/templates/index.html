@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
   <script async src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -64,7 +65,7 @@
 <div class="container" style="margin-top:2%">
 	 	{% for article in articles %}
                  <div class="col-md-8 col-md-offset-1 blogShort">
-                     <h3>{{article.article_name}}</h3>
+                     <h3 style="color:#00b0ff">{{article.article_name}}</h3>
                          <em>Post by: {{article.owner}}, posted on: {{article.date}} <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank"></a></em>
                      
                      <a class="btn btn-blog pull-right marginBottom10" href="{% url 'readpost' article.id %}">READ POST</a> 
@@ -87,6 +88,8 @@
 </div>
 </div>
 {% endblock %}
+{% block script%}
+
 <script>
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
@@ -147,6 +150,13 @@ $(document).ready(function(){
       FB.AppEvents.logPageView();   
         
     };
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+        alert(response);
+      });
+    }
+
 
     (function(d, s, id){
        var js, fjs = d.getElementsByTagName(s)[0];
@@ -156,12 +166,8 @@ $(document).ready(function(){
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
 
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-  
+
   </script>
+{% endblock%}
 </body>
 </html>

@@ -8,10 +8,12 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout,{'template_name':'index.html'}, name='logout'),
-    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
     url(r'^singup$', views.register, name='signupform'),
     url(r'^dashboard$', views.dashboard, name='dashboard'),
     url(r'^writepost$', views.writepost, name='writepost'),
     url(r'^readpost/(?P<pk>\d+)/$', views.readpost, name='readpost'),
 
+    url(r'^',include('django.contrib.auth.urls')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
+    
     ]
